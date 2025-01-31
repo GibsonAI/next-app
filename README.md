@@ -1,6 +1,6 @@
 # Gibson Next.js App Template
 
-This is a template repository for starting a new project using the Gibson API to manage your data. It is built using Next.js and TypeScript and comes with a type-safe client for the Gibson API. This repository serves as a template only and cannot be modified directly - please use it to create your own project.
+This is a template repository for starting a new full-stack project using the Gibson API to manage your data. It is built using Next.js and TypeScript and comes with a type-safe client for the Gibson API. This repository serves as a template only and cannot be modified directly - please use it to create your own project.
 
 ## Features
 
