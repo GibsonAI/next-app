@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "npx next dev --turbo",
+    "build": "npx next build",
+    "start": "npx next start",
+    "lint": "npx next lint",
     "typegen": "source .env && npx openapi-typescript $GIBSON_API_SPEC -o src/gibson/types.ts --root-types"
   },
   "dependencies": {

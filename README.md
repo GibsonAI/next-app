@@ -1,6 +1,6 @@
-# Gibson Next.js App
+# Gibson Next.js App Template
 
-This is a frontend template for starting a new project using the Gibson API to manage your data. It is built using Next.js and TypeScript and comes with a type-safe client for the Gibson API.
+This is a template repository for starting a new project using the Gibson API to manage your data. It is built using Next.js and TypeScript and comes with a type-safe client for the Gibson API. This repository serves as a template only and cannot be modified directly - please use it to create your own project.
 
 ## Features
 
@@ -20,9 +20,47 @@ This is a frontend template for starting a new project using the Gibson API to m
 
 ## Getting Started
 
-1. Create a new repository from this template
-2. Clone the repository to your local machine
-3. Install dependencies with `npm install`
-4. Create a `.env` file and add the variables from `.env.example` (including your Gibson API key and OpenAPI spec URL)
-5. Generate the Gibson types from the OpenAPI spec with `npm run typegen`
-6. Run the development server with `npm run dev`
+### Quick Setup (Recommended)
+
+The easiest way to get started is using our setup script. Run this command in your terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/GibsonAI/next-app/main/setup.sh | bash
+```
+
+The script will:
+1. Ask for your project name
+2. Create a new directory for your project
+3. Set up a fresh Git repository
+4. Install all dependencies
+5. Guide you through configuring environment variables
+6. Build the project
+
+### Manual Setup
+
+If you prefer to set up manually, follow these steps:
+
+1. Create a new directory for your project:
+   ```bash
+   mkdir my-gibson-app && cd my-gibson-app
+   ```
+2. Clone this template:
+   ```bash
+   git clone https://github.com/GibsonAI/next-app.git .
+   ```
+3. Remove the Git history and start fresh:
+   ```bash
+   rm -rf .git && git init
+   ```
+4. Install dependencies:
+   ```bash
+   npm install
+   ```
+5. Copy the environment file and configure your variables:
+   ```bash
+   cp .env.example .env
+   ```
+6. Build and start the development server:
+   ```bash
+   npm run build && npm run dev
+   ```
