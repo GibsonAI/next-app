@@ -75,34 +75,26 @@ if [ ! -f .env ]; then
     echo "Created .env file from .env.example"
 fi
 
-# Function to update env variable
-update_env_var() {
-    local key=$1
-    local current_value=$(grep "^${key}=" .env | cut -d '=' -f2)
-    local default_value=$current_value
-    
-    if [ -z "$current_value" ] || [[ $current_value == *"<"*">"* ]]; then
-        default_value=""
-    fi
-    
-    read -p "Enter $key (current: ${default_value:-not set}): " new_value
-    
-    if [ ! -z "$new_value" ]; then
-        # If the key exists, replace it. If not, append it.
-        if grep -q "^${key}=" .env; then
-            sed -i '' "s|^${key}=.*|${key}=${new_value}|" .env
-        else
-            echo "${key}=${new_value}" >> .env
-        fi
-        echo -e "${GREEN}✓ Updated ${key}${NC}"
-    fi
-}
+# Get API key
+read -p "Enter your Gibson API key: " api_key
+if [ ! -z "$api_key" ]; then
+    sed -i '' "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
+    echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
+fi
 
-# Update each environment variable
-update_env_var "GIBSON_API_KEY"
-update_env_var "GIBSON_API_URL"
-update_env_var "GIBSON_API_SPEC"
-update_env_var "NEXT_PUBLIC_GIBSON_API_SPEC"
+# Get full OpenAPI spec URL and parse it
+echo "You can find your OpenAPI specification URL in your GibsonAI Project under API Docs"
+read -p "Enter your OpenAPI specification URL: " spec_url
+if [ ! -z "$spec_url" ]; then
+    # Update GIBSON_API_SPEC with the full URL
+    sed -i '' "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
+    
+    # Create the NEXT_PUBLIC version by removing https:// from the URL
+    public_url=$(echo "$spec_url" | sed 's|https://||')
+    sed -i '' "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
+    
+    echo -e "${GREEN}✓ Updated API spec variables${NC}"
+fi
 
 echo -e "\n${BLUE}Installing dependencies...${NC}"
 npm install
