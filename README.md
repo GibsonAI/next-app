@@ -40,27 +40,23 @@ The script will:
 
 If you prefer to set up manually, follow these steps:
 
-1. Create a new directory for your project:
+1. Clone this template:
    ```bash
-   mkdir my-gibson-app && cd my-gibson-app
+   git clone https://github.com/GibsonAI/next-app.git my-gibson-app
    ```
-2. Clone this template:
-   ```bash
-   git clone https://github.com/GibsonAI/next-app.git .
-   ```
-3. Remove the Git history and start fresh:
+2. Remove the Git history and start fresh:
    ```bash
    rm -rf .git && git init
    ```
-4. Install dependencies:
+3. Install dependencies:
    ```bash
    npm install
    ```
-5. Copy the environment file and configure your variables:
+4. Copy the environment file and configure your variables:
    ```bash
    cp .env.example .env
    ```
-6. Build and start the development server:
+5. Build and start the development server:
    ```bash
    npm run build && npm run dev
    ```
