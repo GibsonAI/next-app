@@ -43,17 +43,13 @@ echo -e "${BLUE}Setting up your project...${NC}"
 read -p "Enter your project name (press Enter to use 'gibson-next-app'): " project_name
 project_name=${project_name:-gibson-next-app}
 
-# Create project directory
-echo -e "\nCreating project directory ./${project_name}"
-mkdir -p "$project_name"
-
 echo -e "\nCloning Gibson Next.js template..."
-git clone https://github.com/GibsonAI/next-app.git "$project_name" || {
+git clone https://github.com/GibsonAI/next-app.git $project_name || {
     echo -e "${RED}Failed to clone repository${NC}"
     exit 1
 }
 
-cd "$project_name"
+cd $project_name
 
 # Remove existing git history and initialize new repository
 rm -rf .git
@@ -91,16 +87,12 @@ if [ ! -z "$spec_url" ]; then
     echo -e "${GREEN}✓ Updated API spec variables${NC}"
 fi
 
-# Update package.json scripts to use npx
-echo -e "\n${BLUE}Updating package.json scripts...${NC}"
-sed -i '' 's/"dev": "next dev --turbo"/"dev": "npx next dev --turbo"/' package.json
-sed -i '' 's/"build": "next build"/"build": "npx next build"/' package.json
-sed -i '' 's/"start": "next start"/"start": "npx next start"/' package.json
+echo -e "\n${BLUE}Installing dependencies...${NC}"
+npm install
 
 echo -e "\n${BLUE}Building the project...${NC}"
 npm run build
 
 echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "Your new project is ready in the '${project_name}' directory"
 echo -e "To start the development server:"
-echo -e "Run: ${BLUE}npm run dev${NC}" 
+echo -e "Run: ${BLUE}npm run dev${NC}"
