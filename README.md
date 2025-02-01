@@ -42,7 +42,7 @@ If you prefer to set up manually, follow these steps:
 
 1. Clone this template:
    ```bash
-   git clone https://github.com/GibsonAI/next-app.git my-gibson-app
+   git clone https://github.com/GibsonAI/next-app.git my-gibson-app && cd my-gibson-app
    ```
 2. Remove the Git history and start fresh:
    ```bash
@@ -56,7 +56,7 @@ If you prefer to set up manually, follow these steps:
    ```bash
    cp .env.example .env
    ```
-5. Build and start the development server:
+5. Generate the type-safe API client and start the development server:
    ```bash
-   npm run build && npm run dev
+   npm run typegen && npm run dev
    ```
