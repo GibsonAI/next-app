@@ -90,8 +90,8 @@ fi
 echo -e "\n${BLUE}Installing dependencies...${NC}"
 npm install
 
-echo -e "\n${BLUE}Building the project...${NC}"
-npm run build
+echo -e "\n${BLUE}Generating the type-safe API client...${NC}"
+npm run typegen
 
 echo -e "\n${GREEN}Setup completed successfully!${NC}"
 echo -e "To start the development server:"
