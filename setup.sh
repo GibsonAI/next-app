@@ -44,7 +44,7 @@ read -p "Enter your project name (press Enter to use 'gibson-next-app'): " proje
 project_name=${project_name:-gibson-next-app}
 
 echo -e "\nCloning Gibson Next.js template..."
-git clone https://github.com/GibsonAI/next-app.git $project_name || {
+git clone https://github.com/GibsonAI/next-app.git "$project_name" || {
     echo -e "${RED}Failed to clone repository${NC}"
     exit 1
 }
@@ -69,7 +69,14 @@ fi
 # Get API key
 read -p "Enter your Gibson API key: " api_key
 if [ ! -z "$api_key" ]; then
-    sed -i '' "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
+    case "$(uname)" in
+        "Darwin") # macOS
+            sed -i '' "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
+            ;;
+        *) # Linux and others
+            sed -i "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
+            ;;
+    esac
     echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
 fi
 
@@ -78,11 +85,25 @@ echo "You can find your OpenAPI specification URL in your GibsonAI Project under
 read -p "Enter your OpenAPI specification URL: " spec_url
 if [ ! -z "$spec_url" ]; then
     # Update GIBSON_API_SPEC with the full URL
-    sed -i '' "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
+    case "$(uname)" in
+        "Darwin") # macOS
+            sed -i '' "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
+            ;;
+        *) # Linux and others
+            sed -i "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
+            ;;
+    esac
     
     # Create the NEXT_PUBLIC version by removing https:// from the URL
     public_url=$(echo "$spec_url" | sed 's|https://||')
-    sed -i '' "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
+    case "$(uname)" in
+        "Darwin") # macOS
+            sed -i '' "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
+            ;;
+        *) # Linux and others
+            sed -i "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
+            ;;
+    esac
     
     echo -e "${GREEN}✓ Updated API spec variables${NC}"
 fi
