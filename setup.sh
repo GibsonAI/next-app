@@ -62,21 +62,14 @@ echo -e "\n${BLUE}Setting up environment variables...${NC}"
 
 # Create .env file from example if it doesn't exist
 if [ ! -f .env ]; then
-    cp .env.example .env
-    echo "Created .env file from .env.example"
+    touch .env
+    echo "Created .env file for your project"
 fi
 
-# Get API key
+# Get the user's API key
 read -p "Enter your Gibson API key: " api_key
 if [ ! -z "$api_key" ]; then
-    case "$(uname)" in
-        "Darwin") # macOS
-            sed -i '' "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
-            ;;
-        *) # Linux and others
-            sed -i "s|^GIBSON_API_KEY=.*|GIBSON_API_KEY=${api_key}|" .env
-            ;;
-    esac
+    echo "GIBSON_API_KEY=${api_key}" >> .env
     echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
 fi
 
@@ -85,27 +78,8 @@ echo "You can find your OpenAPI specification URL in your GibsonAI Project under
 read -p "Enter your OpenAPI specification URL: " spec_url
 if [ ! -z "$spec_url" ]; then
     # Update GIBSON_API_SPEC with the full URL
-    case "$(uname)" in
-        "Darwin") # macOS
-            sed -i '' "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
-            ;;
-        *) # Linux and others
-            sed -i "s|^GIBSON_API_SPEC=.*|GIBSON_API_SPEC=${spec_url}|" .env
-            ;;
-    esac
-    
-    # Create the NEXT_PUBLIC version by removing https:// from the URL
-    public_url=$(echo "$spec_url" | sed 's|https://||')
-    case "$(uname)" in
-        "Darwin") # macOS
-            sed -i '' "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
-            ;;
-        *) # Linux and others
-            sed -i "s|^NEXT_PUBLIC_GIBSON_API_SPEC=.*|NEXT_PUBLIC_GIBSON_API_SPEC=${public_url}|" .env
-            ;;
-    esac
-    
-    echo -e "${GREEN}✓ Updated API spec variables${NC}"
+    echo "GIBSON_API_SPEC=${spec_url}" >> .env
+    echo -e "${GREEN}✓ Updated GIBSON_API_SPEC${NC}"
 fi
 
 echo -e "\n${BLUE}Installing dependencies...${NC}"
