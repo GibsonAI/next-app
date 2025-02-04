@@ -66,18 +66,18 @@ if [ ! -f .env ]; then
     echo "Created .env file for your project"
 fi
 
-# Get the user's API key
-read -p "Enter your Gibson API key: " api_key
+# Get the project API key
+echo "You can find the API key for your project in your GibsonAI Project under Settings"
+read -p "Enter the API key for your project: " api_key
 if [ ! -z "$api_key" ]; then
     echo "GIBSON_API_KEY=${api_key}" >> .env
     echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
 fi
 
-# Get full OpenAPI spec URL and parse it
-echo "You can find your OpenAPI specification URL in your GibsonAI Project under API Docs"
-read -p "Enter your OpenAPI specification URL: " spec_url
+# Get the project OpenAPI spec URL
+echo "You can find the OpenAPI specification URL in your GibsonAI Project under API Docs"
+read -p "Enter the OpenAPI specification URL for your project: " spec_url
 if [ ! -z "$spec_url" ]; then
-    # Update GIBSON_API_SPEC with the full URL
     echo "GIBSON_API_SPEC=${spec_url}" >> .env
     echo -e "${GREEN}✓ Updated GIBSON_API_SPEC${NC}"
 fi
