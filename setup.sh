@@ -11,10 +11,10 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-echo -e "${BLUE}Welcome to the Gibson Next.js App Setup Script${NC}\n"
+echo -e "Welcome to GibsonAI's Next.js App Setup Script!\n"
 
 # Check for required tools
-echo "Checking required tools..."
+echo -e "${BLUE}Checking required tools...${NC}\n"
 
 if ! command_exists git; then
     echo -e "${RED}Error: Git is not installed${NC}"
@@ -37,7 +37,7 @@ fi
 echo -e "${GREEN}✓ Required tools are installed${NC}\n"
 
 # Project Setup
-echo -e "${BLUE}Setting up your project...${NC}"
+echo -e "${BLUE}Setting up your project...${NC}\n"
 
 # Get project name
 read -p "Enter your project name (press Enter to use 'gibson-next-app'): " project_name
@@ -58,36 +58,36 @@ git add .
 git commit -m "Initial commit from Gibson Next.js template"
 
 # Environment Variables Setup
-echo -e "\n${BLUE}Setting up environment variables...${NC}"
+echo -e "\n${BLUE}Setting up environment variables...${NC}\n"
 
 # Create .env file from example if it doesn't exist
 if [ ! -f .env ]; then
     touch .env
-    echo "Created .env file for your project"
+    echo -e "${GREEN}✓ Created .env file for your project${NC}\n"
 fi
 
 # Get the project API key
-echo "You can find the API key for your project in your GibsonAI Project under Settings"
+echo -e "You can find the API key for your project in your GibsonAI Project under Settings"
 read -p "Enter the API key for your project: " api_key
 if [ ! -z "$api_key" ]; then
     echo "GIBSON_API_KEY=${api_key}" >> .env
-    echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
+    echo -e "${GREEN}✓ Set GIBSON_API_KEY in .env${NC}\n"
 fi
 
 # Get the project OpenAPI spec URL
-echo "You can find the OpenAPI specification URL in your GibsonAI Project under API Docs"
+echo -e "You can find the OpenAPI specification URL in your GibsonAI Project under API Docs"
 read -p "Enter the OpenAPI specification URL for your project: " spec_url
 if [ ! -z "$spec_url" ]; then
     echo "GIBSON_API_SPEC=${spec_url}" >> .env
-    echo -e "${GREEN}✓ Updated GIBSON_API_SPEC${NC}"
+    echo -e "${GREEN}✓ Set GIBSON_API_SPEC in .env${NC}\n"
 fi
 
-echo -e "\n${BLUE}Installing dependencies...${NC}"
+echo -e "${BLUE}Installing dependencies...${NC}"
 npm install
 
-echo -e "\n${BLUE}Generating the type-safe API client...${NC}"
+echo -e "\n\n${BLUE}Generating the type-safe API client...${NC}"
 npm run typegen
 
-echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "To start the development server:"
-echo -e "Run: ${BLUE}npm run dev${NC}"
+echo -e "\n${GREEN}Setup completed successfully!${NC}\n"
+echo -e "To start working on your project:"
+echo -e "Run: ${BLUE}cd $project_name && npm run dev${NC}"
