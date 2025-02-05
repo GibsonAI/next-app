@@ -21,7 +21,7 @@ git clone https://github.com/GibsonAI/next-app.git "$project_name" || {
     echo -e "${RED}Failed to clone repository${NC}"
     exit 1
 }
-cd "$project_name"
+cd "$project_name" || exit 1
 
 # 2. Remove Git history and initialize new repository
 echo -e "\n${BLUE}2. Initializing fresh Git repository...${NC}"
@@ -54,6 +54,5 @@ fi
 echo -e "\n${BLUE}5. Generating type-safe API client...${NC}"
 npm run typegen
 
-echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "To start the development server, run:"
-echo -e "${BLUE}cd ${project_name} && npm run dev${NC}"
+echo -e "\n${BLUE}6. Starting development server...${NC}"
+npm run dev
