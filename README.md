@@ -25,10 +25,11 @@ This is a template repository for starting a new full-stack project using the Gi
 The easiest way to get started is using our setup script. Run this command in your terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/GibsonAI/next-app/main/setup.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/GibsonAI/next-app/main/setup.sh)
 ```
 
 The script will:
+
 1. Ask for your project name
 2. Create a new directory for your project
 3. Set up a fresh Git repository
@@ -41,22 +42,31 @@ The script will:
 If you prefer to set up manually, follow these steps:
 
 1. Clone this template:
+
    ```bash
    git clone https://github.com/GibsonAI/next-app.git my-gibson-app && cd my-gibson-app
    ```
+
 2. Remove the Git history and start fresh:
+
    ```bash
    rm -rf .git && git init
    ```
+
 3. Install dependencies:
+
    ```bash
    npm install
    ```
+
 4. Copy the environment file and configure your variables:
+
    ```bash
    cp .env.example .env
    ```
+
 5. Generate the type-safe API client and start the development server:
+
    ```bash
    npm run typegen && npm run dev
    ```
