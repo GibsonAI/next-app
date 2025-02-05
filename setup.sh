@@ -6,88 +6,54 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+# Error handling
+set -e
 
 echo -e "${BLUE}Welcome to the Gibson Next.js App Setup Script${NC}\n"
 
-# Check for required tools
-echo "Checking required tools..."
-
-if ! command_exists git; then
-    echo -e "${RED}Error: Git is not installed${NC}"
-    echo "Please install Git from https://git-scm.com/"
-    exit 1
-fi
-
-if ! command_exists node; then
-    echo -e "${RED}Error: Node.js is not installed${NC}"
-    echo "Please install Node.js from https://nodejs.org/"
-    exit 1
-fi
-
-if ! command_exists npm; then
-    echo -e "${RED}Error: npm is not installed${NC}"
-    echo "Please install npm (it usually comes with Node.js)"
-    exit 1
-fi
-
-echo -e "${GREEN}✓ Required tools are installed${NC}\n"
-
-# Project Setup
-echo -e "${BLUE}Setting up your project...${NC}"
-
 # Get project name
-read -p "Enter your project name (press Enter to use 'gibson-next-app'): " project_name
-project_name=${project_name:-gibson-next-app}
+read -p "Enter your project name (press Enter to use 'my-gibson-app'): " project_name
+project_name=${project_name:-my-gibson-app}
 
-echo -e "\nCloning Gibson Next.js template..."
+# 1. Clone the template
+echo -e "\n${BLUE}1. Cloning the template...${NC}"
 git clone https://github.com/GibsonAI/next-app.git "$project_name" || {
     echo -e "${RED}Failed to clone repository${NC}"
     exit 1
 }
+cd "$project_name"
 
-cd $project_name
-
-# Remove existing git history and initialize new repository
+# 2. Remove Git history and initialize new repository
+echo -e "\n${BLUE}2. Initializing fresh Git repository...${NC}"
 rm -rf .git
 git init
-git add .
-git commit -m "Initial commit from Gibson Next.js template"
 
-# Environment Variables Setup
-echo -e "\n${BLUE}Setting up environment variables...${NC}"
-
-# Create .env file from example if it doesn't exist
-if [ ! -f .env ]; then
-    touch .env
-    echo "Created .env file for your project"
-fi
-
-# Get the project API key
-echo "You can find the API key for your project in your GibsonAI Project under Settings"
-read -p "Enter the API key for your project: " api_key
-if [ ! -z "$api_key" ]; then
-    echo "GIBSON_API_KEY=${api_key}" >> .env
-    echo -e "${GREEN}✓ Updated GIBSON_API_KEY${NC}"
-fi
-
-# Get the project OpenAPI spec URL
-echo "You can find the OpenAPI specification URL in your GibsonAI Project under API Docs"
-read -p "Enter the OpenAPI specification URL for your project: " spec_url
-if [ ! -z "$spec_url" ]; then
-    echo "GIBSON_API_SPEC=${spec_url}" >> .env
-    echo -e "${GREEN}✓ Updated GIBSON_API_SPEC${NC}"
-fi
-
-echo -e "\n${BLUE}Installing dependencies...${NC}"
+# 3. Install dependencies
+echo -e "\n${BLUE}3. Installing dependencies...${NC}"
 npm install
 
-echo -e "\n${BLUE}Generating the type-safe API client...${NC}"
+# 4. Set up environment variables
+echo -e "\n${BLUE}4. Setting up environment variables...${NC}"
+cp .env.example .env
+
+echo "You can find your API key in your GibsonAI Project under Settings"
+read -p "Enter your Gibson API key: " api_key
+if [ ! -z "$api_key" ]; then
+    sed -i.bak "s/<your-gibson-api-key>/${api_key}/" .env
+    rm .env.bak
+fi
+
+echo -e "\nYou can find the OpenAPI specification URL in your GibsonAI Project under API Docs"
+read -p "Enter the OpenAPI specification URL: " spec_url
+if [ ! -z "$spec_url" ]; then
+    sed -i.bak "s|https://api\.gibsonai\.com/v1/-/openapi/<hash>|${spec_url}|" .env
+    rm .env.bak
+fi
+
+# 5. Generate type-safe API client and start dev server
+echo -e "\n${BLUE}5. Generating type-safe API client...${NC}"
 npm run typegen
 
 echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "To start the development server:"
-echo -e "Run: ${BLUE}npm run dev${NC}"
+echo -e "To start the development server, run:"
+echo -e "${BLUE}cd ${project_name} && npm run dev${NC}"
