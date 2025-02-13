@@ -9,7 +9,7 @@ type NavigationItem = {
 };
 
 const items: NavigationItem[] = [
-  { href: "/demo", name: "Type-Safe Client Demo" },
+  { href: "/getting-started", name: "Getting Started" },
 ];
 
 export function Navigation() {

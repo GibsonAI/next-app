@@ -7,16 +7,16 @@ This is a template repository for starting a new full-stack project using the Gi
 - Next.js 15
 - React 19
 - TypeScript
-- Type-safe client for the Gibson API
-- React Query + tRPC client
-- UI components with shadcn/ui
-- Validation with zod
+- Type-safe client for interacting with the Gibson API
+- React Query + tRPC client that supports loading + error states, automatic caching, refetching, etc.
+- HeroUI components (easily useable with other frameworks like shadcn/ui, radix-ui, etc.)
+- Runtime validation with Zod
 - Tailwind CSS
 - Hot module replacement (HMR)
 - Support for Server Side Rendering (SSR), Incremental Static Regeneration (ISR), and Client Side Rendering (CSR)
 - React Server Components
 - Server Actions (with examples)
-- Next.js backend server (with example HTTP and tRPC API routes)
+- Next.js server (with example HTTP and tRPC API routes)
 
 ## Getting Started
 

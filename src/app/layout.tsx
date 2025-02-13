@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { ThemeProvider } from "@/providers/theme-provider";
-import { ReactQueryProvider } from "@/providers/react-query-provider";
+import { Providers } from "@/providers";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -17,8 +16,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gibson Demo",
-  description: "Frontend demo app with a type-safe Gibson API client",
+  title: "Gibson Next.js Template",
+  description:
+    "A template for building a type-safe full stack TypeScript application with the Gibson API",
 };
 
 export default function RootLayout({
@@ -31,16 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </ReactQueryProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
