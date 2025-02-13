@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@heroui/react": "2.6.14",
-    "@trpc/client": "11.0.0-rc.764",
-    "@trpc/next": "11.0.0-rc.764",
-    "@trpc/react-query": "11.0.0-rc.764",
-    "@trpc/server": "11.0.0-rc.764",
+    "@trpc/client": "11.0.0-rc.768",
+    "@trpc/next": "11.0.0-rc.768",
+    "@trpc/react-query": "11.0.0-rc.768",
+    "@trpc/server": "11.0.0-rc.768",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "lucide-react": "0.475.0",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@shikijs/transformers": "2.3.2",
-    "@types/node": "22.13.1",
+    "@types/node": "22.13.2",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
     "eslint": "9.20.1",
@@ -43,6 +43,7 @@
     "typescript": "5.7.3"
   },
   "overrides": {
+    "@typescript-eslint/eslint-plugin": "8.24.0",
     "openapi-fetch": "0.13.4",
     "react-is": "19.0.0-rc-65a56d0e-20241020",
     "react": "19.1.0-canary-ff628334-20250205",

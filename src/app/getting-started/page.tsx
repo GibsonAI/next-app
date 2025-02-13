@@ -47,7 +47,7 @@ export default function GettingStarted() {
           <br />
           <br />
           <h2 className="text-2xl font-bold">Gibson Client</h2>
-          You'll find your type-safe Gibson client in{" "}
+          You&apos;ll find your type-safe Gibson client in{" "}
           <Code>{`src/gibson/index.ts`}</Code>
           <br />
           You can use this client to make requests to your Gibson API{" "}
@@ -110,7 +110,7 @@ export default function GettingStarted() {
           />
           <br />
           <h3 className="text-xl font-bold">Server Components</h3>
-          It's also safe to use the Gibson client in{" "}
+          It&apos;s also safe to use the Gibson client in{" "}
           <ExternalLink href="https://nextjs.org/docs/app/building-your-application/rendering/server-components">
             server components
           </ExternalLink>

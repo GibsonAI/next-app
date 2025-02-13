@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { createContext } from "@/server/trpc/context";
 import { appRouter } from "@/server/trpc/routers/app";
@@ -5,7 +6,7 @@ import { appRouter } from "@/server/trpc/routers/app";
 /**
  * Next.js server route for tRPC
  */
-const handler = (req: Request, res: Response) =>
+const handler = (req: NextRequest) =>
   fetchRequestHandler({
     endpoint: "/api/trpc",
     req,
