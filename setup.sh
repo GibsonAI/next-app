@@ -60,11 +60,14 @@ git commit -m "Initial commit from Gibson Next.js template"
 # Environment Variables Setup
 echo -e "\n${BLUE}Setting up environment variables...${NC}\n"
 
-# Create .env file from example if it doesn't exist
+# Create .env file if it doesn't exist
 if [ ! -f .env ]; then
     touch .env
     echo -e "${GREEN}✓ Created .env file for your project${NC}\n"
 fi
+
+# Add the Gibson API Base URL to the .env file
+echo "GIBSON_API_URL=https://api.gibsonai.com/" >> .env
 
 # Get the project API key
 echo -e "You can find the API key for your project in your GibsonAI Project under Settings"
