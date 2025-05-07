@@ -44,7 +44,7 @@ read -p "Enter your project name (press Enter to use 'gibson-next-app'): " proje
 project_name=${project_name:-gibson-next-app}
 
 echo -e "\nCloning Gibson Next.js template..."
-git clone https://github.com/GibsonAI/next-app.git "$project_name" || {
+git clone https://github.com/mariozig/next-app.git "$project_name" || {
     echo -e "${RED}Failed to clone repository${NC}"
     exit 1
 }
